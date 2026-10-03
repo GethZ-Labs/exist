@@ -1,0 +1,26 @@
+# Render Blueprint — one free Node web service running the Next.js site (pages + /api/enquiry).
+# Render → New → Blueprint → pick this repository. See README.md → "Deploy on Render".
+services:
+  - type: web
+    name: exist-website
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      # Contact form email — fill in ONE option (README → "Contact form email").
+      - key: NEXT_PUBLIC_WEB3FORMS_KEY
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
